@@ -1,0 +1,253 @@
+JAVASCRIPT THEORY
+
+1. What is JavaScript? What are its main features?
+
+JavaScript is a programming language used to make web pages interactive.
+It runs inside the browser and also on servers using Node.js.
+
+Main features are as follow:
+It is a scripting language, so it does not need to be compiled first.
+It is dynamically typed, meaning we do not need to write the data type
+of a variable.
+
+2. What is the difference between var, let, and const?
+var:
+It is function scoped, not block scoped.
+It can be redeclared and updated.
+It gets hoisted and initialized as undefined.
+
+let:
+It is block scoped, meaning it only works inside the {} where it is
+written.
+It can be updated but not redeclared in the same scope.
+
+const:
+Also block scoped.
+Value cannot be reassigned after it is set.
+But if it is an object or array, we can still change its content
+
+3. What are primitive and non-primitive data types in JavaScript?
+
+Primitive data types store a single simple value directly. Example:
+string, number, boolean, null, etc
+Non-primitive data types store a reference (address) to the value,
+Example:
+object, array, function.
+
+4. What is the difference between == and ===?
+
+== is called loose equality. It compares values only, and if the
+types are different, it converts one type to another before
+comparing
+=== is called strict equality. It compares both value and type
+without converting anything. 
+It is usually better to use === because it avoids unexpected results
+from automatic type conversion.
+
+
+5. What is type coercion in JavaScript?
+
+Type coercion means JavaScript automatically converts one data type
+into another when needed. This can happen implicitly or explicitly.
+
+Example of implicit coercion:
+"5" + 1 gives "51" (number gets converted to string)
+"5" - 1 gives 4 (string gets converted to number)
+
+Example of explicit coercion:
+Number("5") converts the string "5" to the number 5.
+String(5) converts the number 5 to the string "5".
+
+
+6. What is the difference between null and undefined?
+
+undefined means a variable has been declared but no value has been
+assigned to it yet.
+null means "no value" and it is assigned on purpose by the
+programmer to show that a variable should have no value.
+
+
+7. What is the difference between undefined and not defined?
+
+undefined means the variable exists but has no value assigned to it.
+not defined means the variable was never declared at all in the code. 
+
+8. What are truthy and falsy values in JavaScript?
+
+
+Falsy values (treated as false):
+false, 0, "" (empty string), null
+
+Truthy values (treated as true):
+Almost everything else, including non-empty strings
+
+
+FUNCTIONS AND SCOPE
+--------------------
+
+9. What is the difference between a function declaration and function
+expression?
+
+Function declaration:
+function greet() {
+  console.log("Hello");
+}
+It is hoisted completely, so we can call it even before it is
+written in the code.
+
+Function expression:
+const greet = function () {
+  console.log("Hello");
+};
+Here the function is stored in a variable. It is not hoisted the same
+way, so we cannot call it before this line runs.
+
+
+10. What are arrow functions? How are they different from normal
+functions?
+
+Arrow functions are a shorter way to write functions
+const add = (a, b) => a + b;
+
+Differences from normal functions:
+Arrow functions do not have their own "this". They use "this" from
+the place where they are written (called the outer scope).
+They cannot be used as constructors (cannot use "new" with them).
+
+11. What is scope in JavaScript? Explain global, function, and block
+scope.
+
+Scope means where a variable can be accessed in the code.
+Global scope: Variable declared outside any function or block. It
+can be accessed from anywhere in the code.
+Function scope: Variable declared inside a function using var. It
+can only be accessed inside that function.
+Block scope: Variable declared using let or const inside {}
+It can only be accessed inside that block.
+
+
+12. What is a closure in JavaScript? Give a real-world example.
+
+A closure is when a function remembers the variables from its outer
+function, even after the outer function has finished running.
+
+
+Here, the inner function still remembers the "count" variable even
+though counter() has already finished running. This is used in real
+projects for things like counters, private variables, and function
+factories.
+
+
+13. What is hoisting in JavaScript?
+
+Hoisting means JavaScript moves variable and function declarations to
+the top of their scope before running the code.
+
+var variables are hoisted and set to undefined until the actual
+line runs.
+function declarations are hoisted completely with their full code,
+so they can be called before they appear in the file.
+
+
+14. What is the "this" keyword in JavaScript?
+
+"this" refers to the object that is currently calling the function.
+Its value depends on how the function is called, not where it is
+written.
+
+In an object method, "this" refers to that object.
+In an arrow function, "this" refers to the "this" of the outer
+scope where the arrow function was created.
+
+
+ADVANCED JAVASCRIPT
+---------------------
+
+15. What is a callback function?
+
+A callback function is a function that is passed as an argument into
+another function, and it is called later, usually after some task is
+completed.
+
+Callbacks are commonly used for async tasks like reading files, API
+calls, or timers.
+
+
+16. What are Promises in JavaScript? Explain pending, fulfilled, and
+rejected.
+
+A Promise is an object that represents a value that may not be
+available yet, but will be available in the future. It is used to
+handle async operations in a cleaner way than callbacks.
+
+A promise has three states:
+pending: the initial state, task is still in progress.
+fulfilled: the task completed successfully, and we get a result.
+rejected: the task failed, and we get an error.
+
+17. What is async/await and how does it work with Promises?
+
+async/await is a simpler way to work with Promises, so the code
+looks like normal step by step code instead of using .then() chains.
+
+"async" is written before a function to say that this function
+will return a Promise.
+"await" is used inside an async function to pause the code until
+the Promise is resolved or rejected.
+This looks cleaner than chaining multiple .then() calls.
+
+
+18. What is the JavaScript Event Loop? Explain the Call Stack, Web
+APIs, Callback Queue, and Microtask Queue.
+
+JavaScript is single threaded, meaning it can only do one thing at a
+time. The event loop is what allows it to still handle things like
+timers and API calls without blocking the rest of the code.
+
+Call Stack: Where the currently running code is tracked. Functions
+get added when called and removed when finished.
+
+Web APIs: Browser features that run outside the call stack, handled by the browser itself.
+
+Callback Queue : Where callback functions wait after their Web API task is done,
+until the call stack is empty.
+
+Microtask Queue: Where Promise callbacks (.then, .catch, async/await)
+wait. This queue has higher priority than the callback queue, so its
+tasks run first when the call stack is empty.
+
+
+
+19. What is the difference between shallow copy and deep copy?
+
+Shallow copy: Only copies the first level of an object or array. If
+the object has nested objects or arrays inside it, both the original
+and the copy will still point to the same nested data.
+Example: using spread operator or Object.assign() creates a
+shallow copy.
+
+Deep copy: Copies all levels of the object, including nested objects
+and arrays, so the copy is completely independent of the original.
+Example: using JSON.parse (JSON.stringify(obj)) or structuredClone(obj)
+creates a deep copy.
+
+
+20. What are map(), filter(), reduce(), forEach(), and find()? When
+would you use each?
+
+map(): Creates a new array by transforming every element. Use it
+when you want to change each item and get a new array back.
+
+filter(): Creates a new array with only the elements that pass a
+condition. Use it when you want to keep some items and remove others.
+
+reduce(): Combines all elements into a single value, like a total
+sum or a combined object. Use it when you need one final result from
+the whole array.
+
+forEach(): Runs a function on every element, but does not return a
+new array. Use it when you just want to loop through items and do
+something
+
+find(): Returns the first element that matches a condition, or
+undefined if nothing matches
